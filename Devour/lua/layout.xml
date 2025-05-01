@@ -1,0 +1,99 @@
+<ActorFrame
+     InitCommand="%function(self)
+
+        -- The multiplier of the aft sprites' alpha value.
+        aftMult = 1;
+
+        -- If the user is using a Nvidia graphic card, they have some issues with alphas of sprites.
+        if tonumber(GAMESTATE:GetVersionDate()) >= 20170405 and string.find(string.lower(DISPLAY:GetVendor()), 'nvidia')
+        or string.find(string.lower(PREFSMAN:GetPreference('LastSeenVideoDriver')), 'nvidia') then
+            aftMult = 0.9; -- Setting the alpha multiplier to 0.9.
+        end
+
+    end">
+	<children>
+	<Layer File = "bg.png" Name = "bg" />
+	<Layer Type = "ActorProxy" Name = "PC[1]" />
+	<Layer Type = "ActorProxy" Name = "PC[2]" />
+	<Layer Type = "ActorProxy" Name = "PJ[1]" />
+	<Layer Type = "ActorProxy" Name = "PJ[2]" />
+	<Layer Type = "ActorProxy" Name = "PP[1]" />
+	<Layer Type = "ActorProxy" Name = "PP[2]" />
+	<Layer File="bg\cat.xml" />
+
+	<Layer File="teethhigh.png"
+    InitCommand="%function(self)
+        teethhi = self
+    end"
+	/>
+
+	<Layer File="teethhigh.png"
+    InitCommand="%function(self)
+        teethhiproxy = self
+        self:visible(0)
+        self:x(SCREEN_CENTER_X)
+        self:zoom(0.2)
+    end"
+	/>
+
+	<Layer
+		Type = "Sprite" 
+		Name = "glitchlines"
+		Frag = "shaders/glitch2.frag"
+					InitCommand="%function(self)
+			aftSprite = self;
+			self:basezoomx((SCREEN_WIDTH/DISPLAY:GetDisplayWidth()));
+			self:basezoomy(-1*(SCREEN_HEIGHT/DISPLAY:GetDisplayHeight()))
+			self:x(SCREEN_CENTER_X);
+			self:y(SCREEN_CENTER_Y);
+
+			-- Set this like you want
+			self:zoom(1.00);
+			end"
+		 />
+	<Layer
+		Type = "ActorFrameTexture" Name = "screnaft2"
+		InitCommand="%function(self)
+			aft = self;
+			self:SetWidth(DISPLAY:GetDisplayWidth());
+			self:SetHeight(DISPLAY:GetDisplayHeight());
+			self:EnableDepthBuffer(false);
+			self:EnableAlphaBuffer(true);
+			self:EnableFloat(false);
+			self:EnablePreserveTexture(true);
+			self:Create();
+			aftSprite:SetTexture(self:GetTexture()); -- Put the texture into the sprite above.
+			end" />
+
+	<Layer
+		Type = "Sprite" 
+		Name = "glitchsmear"
+		Texture="white"
+		Frag = "shaders/glitch2.frag"
+		InitCommand="%function(self)
+			aftSprite = self;
+			self:basezoomx((SCREEN_WIDTH/DISPLAY:GetDisplayWidth()));
+			self:basezoomy(-1*(SCREEN_HEIGHT/DISPLAY:GetDisplayHeight()))
+			self:x(SCREEN_CENTER_X);
+			self:y(SCREEN_CENTER_Y);
+
+			-- Set this like you want
+			self:zoom(1.00);
+		end"
+		
+		 />
+	<Layer 
+		Type = "ActorFrameTexture"
+		Name = "screnaft" 
+		InitCommand="%function(self)
+		aft = self;
+		self:SetWidth(DISPLAY:GetDisplayWidth());
+		self:SetHeight(DISPLAY:GetDisplayHeight());
+		self:EnableDepthBuffer(false);
+		self:EnableAlphaBuffer(true);
+		self:EnableFloat(false);
+		self:EnablePreserveTexture(true);
+		self:Create();
+		aftSprite:SetTexture(self:GetTexture()); -- Put the texture into the sprite above.
+	end"/>
+</children></ActorFrame>

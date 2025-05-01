@@ -1,0 +1,19 @@
+		<Layer
+			File="teethtop.png"
+			OnCommand="%function(self) self:zoom(0.8) self:hidden(1) jm_tacHurt = self end"
+			TacHurtCommand="%function(self) self:hidden(0); jm_tacIdle:hidden(1) jm_atTac:hidden(1); self:queuecommand('Vib') end"
+			VibCommand="vibrate;effectmagnitude,10,10,0;sleep,.4;queuecommand,StopVib;"
+			StopVibCommand="stopeffect"
+		 />
+		<Layer Type = "ActorFrameTexture" Name = "screnaftteeth"
+		InitCommand="%function(self)
+		aftscreen = self;
+		self:SetWidth(DISPLAY:GetDisplayWidth());
+		self:SetHeight(DISPLAY:GetDisplayHeight());
+		self:EnableDepthBuffer(false);
+		self:EnableAlphaBuffer(true);
+		self:EnableFloat(false);
+		self:EnablePreserveTexture(true);
+		self:Create();
+		aftSpriteTeeth:SetTexture(self:GetTexture()); -- Put the texture into the sprite above.
+		end" />

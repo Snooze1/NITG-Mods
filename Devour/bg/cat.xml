@@ -1,0 +1,11 @@
+<ActorFrame> <children>
+	<Layer
+		Name="teethtop"
+		File="teethhigh.png"
+		InitCommand="%function(self)
+		self:wag()
+		self:x(SCREEN_CENTER_X);
+		self:y(SCREEN_CENTER_Y);
+		end"
+	/>
+	</children></Layer>

@@ -1,0 +1,9 @@
+<CODE Type="Quad" OnCommand="hidden,1"
+InitCommand="%function(self)
+notedata = {
+	{0.000,0,'M'},
+	{2.000,2,'M'},
+	{4.000,1,'M'},
+	{6.000,3,'M'},
+}
+end"/>
